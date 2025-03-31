@@ -1,0 +1,59 @@
+.mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* Hide the menu button on larger screens */
+.menu-btn {
+  display: none;
+}
+
+/* Mobile Menu Styling */
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: #1976d2; // Same as primary color
+  position: absolute;
+  top: 64px; // Below the toolbar
+  right: 0;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block; // Show on small screens
+  }
+
+  a {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu {
+    display: none; // Hide mobile menu on larger screens
+  }
+}

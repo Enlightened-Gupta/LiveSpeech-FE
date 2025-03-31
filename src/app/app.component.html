@@ -1,0 +1,39 @@
+
+<mat-toolbar color="primary">
+  <span>Ace AI Academy</span>
+  <span class="spacer"></span>
+  <a mat-button routerLink="/live" href="#" style="cursor:pointer;color: white;" *ngIf="authService.isUserAuthenticated">Live Speech |</a>
+  <a mat-button routerLink="/register" href="#" style="cursor:pointer;color: white;" *ngIf="authService.isUserAuthenticated && authService.getUserRole()=='Admin'">Register |</a>
+  <a mat-button routerLink="/login" href="#" style="cursor:pointer;color: white;" *ngIf="!authService.isUserAuthenticated">Log In |</a>
+  <a mat-button routerLink="/login" href="#" style="cursor:pointer;color: white;" (click)="LogOut()" *ngIf="authService.isUserAuthenticated">Log Out</a>
+  <a mat-button routerLink="/about" href="#" style="cursor:pointer;color: white;">About</a>
+  
+</mat-toolbar>
+<!-- <mat-toolbar color="primary" class="mat-toolbar">
+  <span class="logo">My Web App</span>
+  <span class="spacer"></span>
+  <ng-container *ngIf="!isMobile">
+    <a style="color: white;" mat-button routerLink="/live" *ngIf="authService.isUserAuthenticated">Live Speech |</a>
+    <a style="color: white;" mat-button routerLink="/register" *ngIf="authService.isUserAuthenticated && authService.getUserRole() === 'Admin'">Register |</a>
+    <a style="color: white;" mat-button routerLink="/login" (click)="LogOut()" *ngIf="authService.isUserAuthenticated">Log Out</a>
+  </ng-container>
+  <button mat-icon-button (click)="toggleMenu()" class="menu-btn" *ngIf="isMobile">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="mobile-menu" *ngIf="isMobile && menuOpen">
+  <a style="color: white;" mat-button routerLink="/live" (click)="closeMenu()" *ngIf="authService.isUserAuthenticated">Live Speech</a>
+  <a style="color: white;" mat-button routerLink="/register" (click)="closeMenu()" *ngIf="authService.isUserAuthenticated && authService.getUserRole() === 'Admin'">Register</a>
+  <a style="color: white;" mat-button routerLink="/login" (click)="LogOut(); closeMenu()" *ngIf="authService.isUserAuthenticated">Log Out</a>
+</div> -->
+
+<ngx-spinner type="ball-scale-multiple"><p style="color: white" > Please Wait... </p></ngx-spinner>
+<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "pacman" [fullScreen] = "true"><p style="color: white" > Please Wait... </p></ngx-spinner> -->
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>
+<!-- <nav *ngIf="authService.isUserAuthenticated">
+  <a (click)="LogOut()" href="#">Log Out</a> |
+</nav>
+<router-outlet></router-outlet>
+<router-outlet /> -->

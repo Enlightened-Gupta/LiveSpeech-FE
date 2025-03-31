@@ -1,0 +1,51 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow-lg subscription-card">
+        <h2 class="text-center mb-4">Choose Your Subscription</h2>
+
+        <!-- Subscription Plans -->
+        <div class="mb-4">
+            <mat-radio-group [(ngModel)]="selectedPlan" class="w-100">
+                <div class="plan-option p-3 mb-3" (click)="onPlanSelect('monthly')">
+                    <mat-radio-button value="monthly" class="me-2"></mat-radio-button>
+                    <div>
+                        <h4>Monthly Plan</h4>
+                        <p class="mb-0">$6.99/month</p>
+                    </div>
+                </div>
+
+                <div class="plan-option p-3 mb-3" (click)="onPlanSelect('yearly')">
+                    <mat-radio-button value="yearly" class="me-2"></mat-radio-button>
+                    <div>
+                        <h4>Yearly Plan</h4>
+                        <p class="mb-0">$60/year (Save 28%)</p>
+                    </div>
+                </div>
+
+                <div class="plan-option p-3 mb-3" (click)="onPlanSelect('trial')">
+                    <mat-radio-button value="trial" class="me-2"></mat-radio-button>
+                    <div>
+                        <h4>Free Trial</h4>
+                        <p class="mb-0">7 days free, cancel anytime</p>
+                    </div>
+                </div>
+            </mat-radio-group>
+        </div>
+        <div class="input-group mb-4">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" [(ngModel)]="nameOnTheCard" name="nameOnTheCard" required />
+            </mat-form-field>
+        </div>
+        <!-- Stripe Card Info (Visible for Paid Plans) -->
+        <div *ngIf="showPaymentForm" class="payment-form mt-4">
+            <h4>Enter Payment Information</h4>
+            <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions" #card></ngx-stripe-card>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center mt-4">
+            <button mat-raised-button color="primary" class="w-100" (click)="submitSubscription(card)">Subscribe
+                Now</button>
+        </div>
+    </div>
+</div>

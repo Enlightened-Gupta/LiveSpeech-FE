@@ -1,0 +1,50 @@
+mat-form-field {
+    width: 100%;  /* Full width */
+  }
+  
+  input[matInput] {
+    height: 30px;  /* Fixed height */
+  }
+.subscription-card {
+    max-width: 800px;
+    width: 100%;
+    border-radius: 16px;
+    background: #fff;
+  }
+  
+  .plan-option {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  
+  .plan-option:hover,
+  .plan-option mat-radio-button.mat-radio-checked + div {
+    border-color: #007bff;
+  }
+  
+  .payment-form {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* Fade In Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .plan-option {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  
