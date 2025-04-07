@@ -1,10 +1,102 @@
-<div class="card mx-auto mt-5">
+<div class="container mt-4">
+    <div class="card p-3 shadow-sm mx-auto" style="max-width: 900px;">
+      <h3 class="text-center mb-3" style="color: #2C7BE5;">Register</h3>
+      <form #userForm="ngForm" (ngSubmit)="onRegister()">
+  
+        <div class="row">
+          <!-- First & Last Name -->
+          <div class="col-md-6 mb-2">
+            <mat-form-field appearance="outline" class="w-100 dense-form-field">
+              <mat-label>First Name</mat-label>
+              <input matInput type="text" [(ngModel)]="user.firstName" name="firstName" #firstName="ngModel" required />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 mb-2">
+            <mat-form-field appearance="outline" class="w-100 dense-form-field">
+              <mat-label>Last Name</mat-label>
+              <input matInput type="text" [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel" required />
+            </mat-form-field>
+          </div>
+  
+          <!-- Email & Mobile -->
+          <div class="col-md-6 mb-2">
+            <mat-form-field appearance="outline" class="w-100 dense-form-field">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" [(ngModel)]="user.email" name="email" #email="ngModel" required />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 mb-2">
+            <mat-form-field appearance="outline" class="w-100 dense-form-field">
+              <mat-label>Mobile</mat-label>
+              <input matInput type="text" [(ngModel)]="user.phoneNumber" name="phoneNumber" #phoneNumber="ngModel" required />
+            </mat-form-field>
+          </div>
+  
+          <!-- Password & Confirm Password -->
+          <div class="col-md-6 mb-2">
+            <mat-form-field appearance="outline" class="w-100 dense-form-field">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" [(ngModel)]="user.password" name="password" #password="ngModel" required />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 mb-2">
+            <mat-form-field appearance="outline" class="w-100 dense-form-field">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput type="password" [(ngModel)]="user.confirmPassword" name="confirmPassword" #confirmPassword="ngModel" required />
+            </mat-form-field>
+          </div>
+  
+          <!-- City & State -->
+          <div class="col-md-6 mb-2">
+            <mat-form-field appearance="outline" class="w-100 dense-form-field">
+              <mat-label>City</mat-label>
+              <input matInput type="text" [(ngModel)]="user.city" name="city" #city="ngModel" required />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 mb-2">
+            <mat-form-field appearance="outline" class="w-100 dense-form-field">
+              <mat-label>State</mat-label>
+              <input matInput type="text" [(ngModel)]="user.state" name="state" #state="ngModel" required />
+            </mat-form-field>
+          </div>
+  
+          <!-- Country -->
+          <div class="col-md-6 mb-2">
+            <mat-form-field appearance="outline" class="w-100 dense-form-field">
+              <mat-label>Country</mat-label>
+              <input matInput type="text" [(ngModel)]="user.country" name="country" #country="ngModel" required />
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="text-center mt-3">
+          <button mat-raised-button color="primary"
+                  style="background-color: #2C7BE5; color: #fff; width: 200px;"
+                  type="submit"
+                  [disabled]="!userForm.valid || password.value !== confirmPassword.value">
+            Register
+          </button>
+          <div *ngIf="password.value !== confirmPassword.value && confirmPassword.touched" class="text-danger mt-2">
+            Passwords do not match.
+          </div>
+        </div>
+  
+      </form>
+    </div>
+  </div>
+  
+  
+  
+  
+<!-- <div class="card mx-auto mt-5">
     <h3 class="text-left">Register </h3>
-    <form #userForm="ngForm" (ngSubmit)="onRegister()"> 
+    <form #userForm="ngForm" (ngSubmit)="onRegister()">
         <div class="input-group mb-3">
             <mat-form-field appearance="outline">
                 <mat-label>First Name</mat-label>
-                <input matInput type="text" [(ngModel)]="user.firstName" #firstName="ngModel" name="firstName" required />
+                <input matInput type="text" [(ngModel)]="user.firstName" #firstName="ngModel" name="firstName"
+                    required />
             </mat-form-field>
         </div>
         <div class="input-group mb-3">
@@ -12,9 +104,9 @@
                 <mat-label>Last Name</mat-label>
                 <input matInput type="text" [(ngModel)]="user.lastName" #lastName="ngModel" name="lastName" required />
             </mat-form-field>
-        </div>      
+        </div>
         <div class="input-group mb-3">
-            
+
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input matInput type="text" [(ngModel)]="user.email" #email="ngModel" name="email" required />
@@ -23,19 +115,22 @@
         <div class="input-group mb-3">
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput type="password" [(ngModel)]="user.password" #password="ngModel" name="password" required />
+                <input matInput type="password" [(ngModel)]="user.password" #password="ngModel" name="password"
+                    required />
             </mat-form-field>
         </div>
         <div class="input-group mb-3">
             <mat-form-field appearance="outline">
                 <mat-label>Mobile</mat-label>
-                <input matInput type="text" [(ngModel)]="user.phoneNumber" #phoneNumber="ngModel" name="phoneNumber" required />
+                <input matInput type="text" [(ngModel)]="user.phoneNumber" #phoneNumber="ngModel" name="phoneNumber"
+                    required />
             </mat-form-field>
         </div>
         <div class="input-group mb-3">
             <mat-form-field appearance="outline">
                 <mat-label>Address</mat-label>
-                <input matInput type="text" [(ngModel)]="user.addressLine1" #addressLine1="ngModel" name="addressLine1" required />
+                <input matInput type="text" [(ngModel)]="user.addressLine1" #addressLine1="ngModel" name="addressLine1"
+                    required />
             </mat-form-field>
         </div>
         <div class="input-group mb-3">
@@ -53,7 +148,8 @@
         <div class="input-group mb-3">
             <mat-form-field appearance="outline">
                 <mat-label>Postal Code</mat-label>
-                <input matInput type="text" [(ngModel)]="user.postalCode" #postalCode="ngModel" name="postalCode" required />
+                <input matInput type="text" [(ngModel)]="user.postalCode" #postalCode="ngModel" name="postalCode"
+                    required />
             </mat-form-field>
         </div>
         <div class="input-group mb-3">
@@ -62,48 +158,8 @@
                 <input matInput type="text" [(ngModel)]="user.country" #country="ngModel" name="country" required />
             </mat-form-field>
         </div>
-        <button mat-raised-button color="primary" class="btn btn-primary" type="submit" [disabled]="postalCode.invalid || country.invalid || city.invalid || state.invalid || addressLine1.invalid || email.invalid || lastName.invalid || firstName.invalid || password.invalid || phoneNumber.invalid">Register</button>
-        <!-- <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Username</mat-label>
-                        <input matInput type="text" [(ngModel)]="user.username" name="username" required />
-                    </mat-form-field>
-                </div>
-                <div class="col-sm">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Password</mat-label>
-                        <input matInput type="password" [(ngModel)]="user.password" name="password" required />
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm">
-                    <mat-form-field appearance="outline">
-                        <mat-label>First Name</mat-label>
-                        <input matInput type="text" [(ngModel)]="user.firstName" name="firstName" required />
-                    </mat-form-field>
-                </div>
-                <div class="col-sm">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Last Name</mat-label>
-                        <input matInput type="text" [(ngModel)]="user.lastName" name="lastName" required />
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm">
-                    <button mat-raised-button color="primary" class="btn btn-primary" type="submit">Register</button>
-                </div>
-
-            </div>
-        </div> -->
-
-
-
-
-
+        <button mat-raised-button color="primary" class="btn btn-primary" type="submit"
+            [disabled]="postalCode.invalid || country.invalid || city.invalid || state.invalid || addressLine1.invalid || email.invalid || lastName.invalid || firstName.invalid || password.invalid || phoneNumber.invalid">Register</button>
     </form>
 
-</div>
+</div> -->

@@ -57,3 +57,45 @@
     display: none; // Hide mobile menu on larger screens
   }
 }
+
+.link-button {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 8px 0;
+  background-color: #2C7BE5;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken(#2C7BE5, 10%);
+    text-decoration: none;
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(44, 123, 229, 0.4);
+  }
+}
+
+.trial-strip {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1050; // on top of most things but below modals
+  text-align: center;
+  font-size: 0.95rem;
+  border-radius: 0;
+  padding: 0.5rem 1rem;
+}
+body {
+  padding-top: 3rem; // to avoid overlap with fixed strip
+}
+
+

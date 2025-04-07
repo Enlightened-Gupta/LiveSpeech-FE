@@ -22,13 +22,20 @@ export class LiveComponent implements OnInit {
   transcript = '';
   answer = '';
 
-  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private authService: AuthService,private router: Router) { }
+  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private authService: AuthService, private router: Router) { }
   ngOnInit() {
 
     if (this.authService.getUserRole() != "Admin") {
-      this.authService.isCardAvailable().subscribe((res) => {
+      this.authService.isSubscriptionAvailable().subscribe((res) => {
         if (!res.success) {
-          this.router.navigate(['subscribe']); 
+          this.router.navigate(['subscribe']);
+        } else {
+          this.authService.trialDaysLeft = res.daysRemaining;
+          if (this.authService.trialDaysLeft > 0) {
+            this.authService.showTrialStrip = true;
+          } else {
+            this.authService.showTrialStrip = false;
+          }
         }
       });
     }

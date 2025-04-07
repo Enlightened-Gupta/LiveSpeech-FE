@@ -1,8 +1,54 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4 shadow-lg subscription-card">
+      <h2 class="text-center mb-4 heading">Choose Your Subscription</h2>
+  
+      <mat-radio-group [(ngModel)]="selectedPlan" class="w-100 plan-options">
+        <div class="plan-option" (click)="onPlanSelect('monthly')">
+          <mat-radio-button value="monthly" class="me-2"></mat-radio-button>
+          <div>
+            <h5>Monthly Plan</h5>
+            <p>$6.99/month</p>
+          </div>
+        </div>
+  
+        <div class="plan-option" (click)="onPlanSelect('yearly')">
+          <mat-radio-button value="yearly" class="me-2"></mat-radio-button>
+          <div>
+            <h5>Yearly Plan</h5>
+            <p>$60.99/year <span class="text-success">(Save 28%)</span></p>
+          </div>
+        </div>
+  
+        <div class="plan-option" (click)="onPlanSelect('trial')">
+          <mat-radio-button value="trial" class="me-2"></mat-radio-button>
+          <div>
+            <h5>Free Trial</h5>
+            <p>15 days free, cancel anytime</p>
+          </div>
+        </div>
+      </mat-radio-group>
+  
+      <mat-form-field appearance="outline" class="w-100 mt-4">
+        <mat-label>Name on the Card</mat-label>
+        <input matInput type="text" [(ngModel)]="nameOnTheCard" name="nameOnTheCard" required />
+      </mat-form-field>
+  
+      <div class="payment-form mt-4">
+        <h5>Enter Payment Information</h5>
+        <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions" #card (change)="onCardChange($event)"></ngx-stripe-card>
+      </div>
+  
+      <div class="text-center mt-4">
+        <button mat-raised-button color="primary" style="color: #FFFFFF;" class="w-100 btn-primary" [disabled]="!isFormValid()" (click)="submitSubscription(card)">
+          Subscribe Now
+        </button>
+      </div>
+    </div>
+  </div>
+  
+<!-- <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow-lg subscription-card">
         <h2 class="text-center mb-4">Choose Your Subscription</h2>
-
-        <!-- Subscription Plans -->
         <div class="mb-4">
             <mat-radio-group [(ngModel)]="selectedPlan" class="w-100">
                 <div class="plan-option p-3 mb-3" (click)="onPlanSelect('monthly')">
@@ -36,16 +82,13 @@
                 <input matInput type="text" [(ngModel)]="nameOnTheCard" name="nameOnTheCard" required />
             </mat-form-field>
         </div>
-        <!-- Stripe Card Info (Visible for Paid Plans) -->
         <div *ngIf="showPaymentForm" class="payment-form mt-4">
             <h4>Enter Payment Information</h4>
             <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions" #card></ngx-stripe-card>
         </div>
-
-        <!-- Submit Button -->
         <div class="text-center mt-4">
             <button mat-raised-button color="primary" class="w-100" (click)="submitSubscription(card)">Subscribe
                 Now</button>
         </div>
     </div>
-</div>
+</div> -->

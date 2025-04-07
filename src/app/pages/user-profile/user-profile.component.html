@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 profile-card">
+      <h3 class="text-center mb-4 text-primary">User Profile</h3>
+  
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label fw-bold">First Name</label>
+          <p>{{ user?.firstName }}</p>
+        </div>
+  
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Last Name</label>
+          <p>{{ user?.lastName }}</p>
+        </div>
+  
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Email</label>
+          <p>{{ user?.email }}</p>
+        </div>
+  
+        <div class="col-md-6" *ngIf="user?.subscriptionType">
+          <label class="form-label fw-bold">Subscription</label>
+          <p>{{ user.subscriptionType }} (Expires: {{ user.subscriptionEndDate}})</p>
+        </div>
+        <div class="col-md-6" *ngIf="user?.subscriptionType">
+            <label class="form-label fw-bold">Subscription Status</label>
+            <p>{{ user.status }}</p>
+          </div>
+  
+        <div class="col-md-12 text-center mt-4" *ngIf="isLoggedIn && user.status=='active'">
+          <button mat-raised-button color="warn" class="btn-primary" style="color: #FFFFFF;" (click)="cancelSubscription()">Cancel Subscription</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

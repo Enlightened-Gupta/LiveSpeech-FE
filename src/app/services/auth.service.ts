@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { UserLoginRequest } from '../models/userRequest';
 import * as crypto from 'crypto-js';
 import { jwtDecode } from 'jwt-decode';
+import { ForgotPasswordRequest } from '../models/forgotPasswordRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,8 @@ import { jwtDecode } from 'jwt-decode';
 export class AuthService {
 
   public isUserAuthenticated:boolean=false;
+  public trialDaysLeft:number=0;
+  public showTrialStrip:boolean=false;
   private apiUrl = environment.apiUrl + '/api/auth';
   private currentUserSubject: BehaviorSubject<any>;
 
@@ -23,6 +26,9 @@ export class AuthService {
 
   register(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, user);
+  }
+  forgotPassword(request: ForgotPasswordRequest): Observable<any> {
+    return this.http.post(`${this.apiUrl}/forgotpassword`, request);
   }
 
   login(credentials: UserLoginRequest): Observable<AuthResponse> {
@@ -63,9 +69,14 @@ export class AuthService {
       }
       return '';
   }
-  isCardAvailable()
+  isSubscriptionAvailable()
   {
-    var serviceUrl = `${this.apiUrl}/iscardavailable`;
+    var serviceUrl = `${this.apiUrl}/isValidSubscriptionAvailable`;
+    return this.http.get<any>(serviceUrl);
+  }
+  getUserProfile()
+  {
+    var serviceUrl = `${this.apiUrl}/profile`;
     return this.http.get<any>(serviceUrl);
   }
 }

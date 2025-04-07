@@ -40,6 +40,7 @@ body {
   background-color: #f5f7fa;
   font-family: "Poppins", sans-serif;
   color: #333;
+  font-size: 14px;
 }
 
 .container {
@@ -133,4 +134,50 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+:root {
+  --primary-color: #2C7BE5;
+  --secondary-color: #E3F2FD;
+  --background-color: #F8F9FA;
+  --text-color: #212529;
+  --card-bg-color: #FFFFFF;
+  --border-color: #DEE2E6;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #2568C5;
+  border-color: #2568C5;
+}
+
+.card {
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.mat-toolbar {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.mat-button, .mat-raised-button {
+  color: white;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: var(--primary-color);
 }

@@ -1,21 +1,7 @@
 <div class="card mx-auto mt-5">
   <!-- <h3 class="text-left">Live Speech Recognition</h3> -->
 
-  <div class="text-left mt-3">
-    <button mat-raised-button color="accent" class="btn btn-primary" (click)="startListening()" style="margin-right: 10px;">
-      <i class="bi bi-mic-fill" title="Start Listening"></i>Start Listing
-    </button>
-    <!-- <button mat-raised-button [disabled]="!isRecording" color="warn" class="btn btn-primary" (click)="stopListening()" style="margin-right: 10px;background-color: red !important;">
-      <i class="bi bi-mic-mute-fill" title="Stop Listening"></i>
-    </button> -->
-    <button mat-raised-button color="warn" class="btn btn-primary" [disabled]="transcript.length<=0" (click)="showAnswer()" style="margin-right: 10px;">
-      <i class="bi bi-chat-dots-fill" title="Show Response/Answer"></i> Show Answer
-    </button>
-    <!-- <button mat-raised-button color="warn" class="btn btn-primary" (click)="reset()" style="background-color: orange !important;">
-      <i class="bi bi-trash2-fill" title="Reset"></i>
-    </button> -->
-    
-  </div>
+
 
   <div class="mt-4">
     <mat-form-field class="w-100">
@@ -33,6 +19,23 @@
       <mat-label>Answer</mat-label>
       <textarea matInput rows="10" [(ngModel)]="answer"></textarea>
     </mat-form-field>
+  </div>
+  <div class="text-left mt-3">
+    <button mat-raised-button color="accent" class="btn btn-primary" (click)="startListening()"
+      style="margin-right: 10px;">
+      <i class="bi bi-mic-fill" title="Start Listening"></i>Start Recording
+    </button>
+    <!-- <button mat-raised-button [disabled]="!isRecording" color="warn" class="btn btn-primary" (click)="stopListening()" style="margin-right: 10px;background-color: red !important;">
+      <i class="bi bi-mic-mute-fill" title="Stop Listening"></i>
+    </button> -->
+    <button mat-raised-button color="warn" class="btn btn-primary" [disabled]="transcript.length<=0"
+      (click)="showAnswer()" style="margin-right: 10px;">
+      <i class="bi bi-chat-dots-fill" title="Show Response/Answer"></i> Show Response
+    </button>
+    <!-- <button mat-raised-button color="warn" class="btn btn-primary" (click)="reset()" style="background-color: orange !important;">
+      <i class="bi bi-trash2-fill" title="Reset"></i>
+    </button> -->
+
   </div>
 </div>
 

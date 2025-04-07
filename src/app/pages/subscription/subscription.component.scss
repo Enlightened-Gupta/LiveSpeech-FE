@@ -1,50 +1,59 @@
-mat-form-field {
-    width: 100%;  /* Full width */
-  }
-  
-  input[matInput] {
-    height: 30px;  /* Fixed height */
-  }
 .subscription-card {
-    max-width: 800px;
-    width: 100%;
-    border-radius: 16px;
-    background: #fff;
+  max-width: 500px;
+  border-radius: 12px;
+  background-color: #fdfdfd;
+
+  .heading {
+    font-size: 1.75rem;
+    color: #2C7BE5;
   }
-  
-  .plan-option {
+
+  .plan-options {
     display: flex;
-    align-items: center;
-    border: 2px solid #ccc;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: border-color 0.3s;
-  }
-  
-  .plan-option:hover,
-  .plan-option mat-radio-button.mat-radio-checked + div {
-    border-color: #007bff;
-  }
-  
-  .payment-form {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  /* Fade In Animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+
     .plan-option {
-      flex-direction: column;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #f8f9fa;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #e9f0fe;
+      }
+
+      h5 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #2C7BE5;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #333;
+      }
     }
   }
-  
+
+  .payment-form {
+    h5 {
+      color: #2C7BE5;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  button {
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+}

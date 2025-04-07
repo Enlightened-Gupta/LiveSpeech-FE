@@ -32,12 +32,24 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = localStorage.getItem('token'); // Get stored token
   const apiKey = environment.apiKey;
   // Clone the request and add Authorization and API Key headers
-  const authReq = req.clone({
-    setHeaders: {
-      ...(token ? { Authorization: `Bearer ${token}` } : {}), // Add Authorization if token exists
-      'X-API-KEY': apiKey, // Custom API key header
-    }
-  });
-
-  return next(authReq); // Forward the modified request
+  if(token!==null)
+  {
+    const authReq = req.clone({
+      setHeaders: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}), // Add Authorization if token exists
+        'X-API-KEY': apiKey, // Custom API key header
+      }
+    });
+  
+    return next(authReq); // Forward the modified request
+  }else{
+    const authReq = req.clone({
+      setHeaders: {
+        'X-API-KEY': apiKey, // Custom API key header
+      }
+    });
+  
+    return next(authReq); // Forward the modified request
+  }
+ 
 };

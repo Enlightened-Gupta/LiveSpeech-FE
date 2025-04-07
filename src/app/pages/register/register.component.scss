@@ -1,7 +1,20 @@
-mat-form-field {
-    width: 100%;  /* Full width */
-  }
+// mat-form-field {
+//     width: 100%;  
+//   }
   
-  input[matInput] {
-    height: 30px;  /* Fixed height */
-  }
+//   input[matInput] {
+//     height: 30px;  
+//   }
+.dense-form-field .mat-form-field-wrapper {
+  padding-bottom: 0.2em;
+}
+
+.dense-form-field .mat-form-field-flex {
+  height: 36px;
+  align-items: center;
+}
+
+.dense-form-field .mat-input-element {
+  padding: 0;
+  font-size: 14px;
+}

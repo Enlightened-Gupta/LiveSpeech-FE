@@ -5,6 +5,7 @@ import { FormsModule, FormBuilder, FormGroup, Validators,ReactiveFormsModule } f
 import { UserLoginRequest } from '../../models/userRequest';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckbox } from '@angular/material/checkbox';
 import { NgxSpinnerService } from "ngx-spinner";
 // import * as bcrypt from 'bcryptjs';
 // import * as crypto from 'crypto-js';
@@ -27,6 +28,7 @@ export class LoginComponent {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+      //agreement: ['', Validators.required],
     });
   }
   get username() {

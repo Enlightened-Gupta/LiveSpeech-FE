@@ -1,14 +1,30 @@
 
 <mat-toolbar color="primary">
+  <!-- Logo Image -->
+  <img src="/assets/images/logo.jpeg" alt="App Logo" height="100" style="margin-right: 16px;margin-top: 15px;" />
+
+  <span class="spacer"></span>
+
+  <!-- Navigation Links -->
+  <a mat-button class="link-button" routerLink="/live" style="color: white;" *ngIf="authService.isUserAuthenticated">Live Speech  </a>
+  <a mat-button class="link-button" routerLink="/register" style="color: white;" *ngIf="authService.isUserAuthenticated && authService.getUserRole() === 'Admin'">Register   </a>
+  <a mat-button class="link-button" routerLink="/login" style="color: white;" *ngIf="!authService.isUserAuthenticated">Log In   </a>
+  <a mat-button class="link-button" routerLink="/login" style="color: white;" (click)="LogOut()" *ngIf="authService.isUserAuthenticated">Log Out   </a>
+  <a mat-button class="link-button" routerLink="/about" style="color: white;">About</a>
+  <a mat-button class="link-button" routerLink="/profile" style="color: white;" *ngIf="authService.isUserAuthenticated">Profile  </a>
+</mat-toolbar>
+<!-- <mat-toolbar color="primary">
   <span>Ace AI Academy</span>
   <span class="spacer"></span>
-  <a mat-button routerLink="/live" href="#" style="cursor:pointer;color: white;" *ngIf="authService.isUserAuthenticated">Live Speech |</a>
-  <a mat-button routerLink="/register" href="#" style="cursor:pointer;color: white;" *ngIf="authService.isUserAuthenticated && authService.getUserRole()=='Admin'">Register |</a>
-  <a mat-button routerLink="/login" href="#" style="cursor:pointer;color: white;" *ngIf="!authService.isUserAuthenticated">Log In |</a>
-  <a mat-button routerLink="/login" href="#" style="cursor:pointer;color: white;" (click)="LogOut()" *ngIf="authService.isUserAuthenticated">Log Out</a>
+  <a mat-button routerLink="/live" href="#" style="cursor:pointer;color: white;" *ngIf="authService.isUserAuthenticated">Live Speech | </a>
+  <a mat-button routerLink="/register" href="#" style="cursor:pointer;color: white;" *ngIf="authService.isUserAuthenticated && authService.getUserRole()=='Admin'">Register | </a>
+  <a mat-button routerLink="/login" href="#" style="cursor:pointer;color: white;" *ngIf="!authService.isUserAuthenticated">Log In | </a>
+  <a mat-button routerLink="/login" href="#" style="cursor:pointer;color: white;" (click)="LogOut()" *ngIf="authService.isUserAuthenticated">Log Out | </a>
   <a mat-button routerLink="/about" href="#" style="cursor:pointer;color: white;">About</a>
   
-</mat-toolbar>
+</mat-toolbar> -->
+
+
 <!-- <mat-toolbar color="primary" class="mat-toolbar">
   <span class="logo">My Web App</span>
   <span class="spacer"></span>
@@ -30,6 +46,10 @@
 <ngx-spinner type="ball-scale-multiple"><p style="color: white" > Please Wait... </p></ngx-spinner>
 <!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "pacman" [fullScreen] = "true"><p style="color: white" > Please Wait... </p></ngx-spinner> -->
 <div class="container mt-4">
+  <!-- Trial Subscription Alert Strip -->
+  <!-- <div *ngIf="authService.showTrialStrip" style="margin-top: 66px; margin-left: 30px;" class="alert alert-warning alert-dismissible fade show trial-strip mb-0" role="alert">
+    <strong>Trial Mode:</strong> Your subscription will expire in <strong>{{ authService.trialDaysLeft }}</strong> day{{ authService.trialDaysLeft > 1 ? 's' : '' }}.
+  </div> -->
   <router-outlet></router-outlet>
 </div>
 <!-- <nav *ngIf="authService.isUserAuthenticated">

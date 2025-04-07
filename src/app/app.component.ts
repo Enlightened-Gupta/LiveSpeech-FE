@@ -1,15 +1,15 @@
-import { Component,HostListener  } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,CommonModule,MatToolbarModule,NgxSpinnerModule,RouterModule,MatIconModule],
+  imports: [RouterOutlet, CommonModule, MatToolbarModule, NgxSpinnerModule, RouterModule, MatIconModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true
@@ -17,9 +17,11 @@ import { MatIconModule } from '@angular/material/icon';
 export class AppComponent {
   menuOpen = false;
   isMobile = false;
-  title = 'Live-Speech';
+  title = 'Ace AI Academy';
   isLoggedin: boolean = false;
-  constructor(private router: Router, public authService: AuthService) {
+  // showTrialStrip: boolean = false;
+  // trialDaysLeft: number = 0;
+  constructor(private router: Router, public authService: AuthService,private spinner: NgxSpinnerService) {
     this.checkScreenSize();
   }
   @HostListener('window:resize', ['$event'])
@@ -36,20 +38,36 @@ export class AppComponent {
   }
   ngOnInit() {
     this.isLoggedin = this.authService.isAuthenticated();
+    // if (this.isLoggedin) {
+    //   this.spinner.show();
+    //   this.authService.isSubscriptionAvailable().subscribe({
+    //     next: (response) => {
+    //       debugger;
+    //       this.spinner.hide();
+    //       //alert(response.message);
+    //       this.trialDaysLeft=response.daysRemaining;
+    //       if (this.trialDaysLeft > 0) {
+    //         this.showTrialStrip = true;
+    //       }
+    //     },
+    //     error: (err) => {
+    //       debugger;
+    //       this.spinner.hide();
+    //       alert(err.error.text);
+    //     }
+    //   });
+    // }
   }
-  liveSpeech()
-  {
-    this.router.navigateByUrl("/live", {replaceUrl: true});
+  liveSpeech() {
+    this.router.navigateByUrl("/live", { replaceUrl: true });
   }
-  register()
-  {
-    this.router.navigateByUrl("/register", {replaceUrl: true});
+  register() {
+    this.router.navigateByUrl("/register", { replaceUrl: true });
   }
-  LogOut()
-  {
+  LogOut() {
     this.authService.logout();
     this.isLoggedin = this.authService.isAuthenticated();
-    this.router.navigateByUrl("/login", {replaceUrl: true});
+    this.router.navigateByUrl("/login", { replaceUrl: true });
   }
   // OpenLiveSpeech()
   // {
