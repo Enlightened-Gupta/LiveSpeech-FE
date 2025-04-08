@@ -13,4 +13,5 @@ export interface RegisterUserRequest
     State:string;
     PostalCode:string;
     Country:string;
+    IsAgreed:boolean;
 }

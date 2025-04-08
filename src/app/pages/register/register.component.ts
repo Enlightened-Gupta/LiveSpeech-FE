@@ -9,15 +9,16 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { CommonModule } from '@angular/common';
 import { UserLoginRequest } from '../../models/userRequest';
 import { Router } from '@angular/router';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatCardModule, CommonModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatCardModule, CommonModule,MatCheckbox],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  user = { email: '', firstName: '', lastName: '', password: '', phoneNumber: '', city: '', state: '', country: '', confirmPassword: '' };
+  user = { email: '', firstName: '', lastName: '', password: '', phoneNumber: '', city: '', state: '', country: '', confirmPassword: '',isAgreed:false };
   constructor(private authService: AuthService, private spinner: NgxSpinnerService, private router: Router) { }
   onRegister() {
     this.spinner.show();
@@ -32,7 +33,8 @@ export class RegisterComponent {
       City: this.user.city,
       Country: this.user.country,
       PostalCode: "",
-      State: this.user.state
+      State: this.user.state,
+      IsAgreed:this.user.isAgreed
     };
 
     this.authService.register(registerUserReq).subscribe({
@@ -52,12 +54,15 @@ export class RegisterComponent {
           },// this.router.navigate(['#/live']),
           error: exp => {
             this.spinner.hide();
-            alert(exp.error.text);
+            alert(exp.error.message);
           }
         });
         
       },
-      error: (err) => { this.spinner.hide(); alert(err.error.text); },
+      error: (err) => { 
+        this.spinner.hide(); 
+        alert(err.error.message); 
+      },
     });
   }
 }
