@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { NgxSpinnerService } from "ngx-spinner";
+import { AlertService } from '../../services/alert.service';
 // import * as bcrypt from 'bcryptjs';
 // import * as crypto from 'crypto-js';
 
@@ -24,7 +25,7 @@ export class LoginComponent {
   // username = '';
   // password = '';
 
-  constructor(private authService: AuthService, private router: Router, private spinner: NgxSpinnerService, private fb: FormBuilder) {
+  constructor(private alertService: AlertService,private authService: AuthService, private router: Router, private spinner: NgxSpinnerService, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -41,6 +42,13 @@ export class LoginComponent {
   isFormValid(): boolean {
     return this.loginForm.valid;
   }
+  onActionSuccess() {
+    this.alertService.show('Action completed successfully!', 'success');
+  }
+
+  onActionError() {
+    this.alertService.show('Something went wrong!', 'danger');
+  }
   async onSubmit() {
     if (this.isFormValid()) {
       this.spinner.show();
@@ -55,6 +63,7 @@ export class LoginComponent {
       this.authService.login(userRequest).subscribe({
         next: (res) => { 
           this.spinner.hide(); 
+          //this.onActionSuccess();
           this.router.navigate(['live']); 
         },// this.router.navigate(['#/live']),
         error: err => { 

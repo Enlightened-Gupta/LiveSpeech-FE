@@ -6,12 +6,12 @@
   <span class="spacer"></span>
 
   <!-- Navigation Links -->
+  <a mat-button class="link-button" routerLink="/about" style="color: white;">About</a>
   <a mat-button class="link-button" routerLink="/live" style="color: white;" *ngIf="authService.isUserAuthenticated">Live Speech  </a>
   <a mat-button class="link-button" routerLink="/register" style="color: white;" *ngIf="authService.isUserAuthenticated && authService.getUserRole() === 'Admin'">Register   </a>
   <a mat-button class="link-button" routerLink="/login" style="color: white;" *ngIf="!authService.isUserAuthenticated">Log In   </a>
-  <a mat-button class="link-button" routerLink="/login" style="color: white;" (click)="LogOut()" *ngIf="authService.isUserAuthenticated">Log Out   </a>
-  <a mat-button class="link-button" routerLink="/about" style="color: white;">About</a>
   <a mat-button class="link-button" routerLink="/profile" style="color: white;" *ngIf="authService.isUserAuthenticated">Profile  </a>
+  <a mat-button class="link-button" routerLink="/login" style="color: white;" (click)="LogOut()" *ngIf="authService.isUserAuthenticated">Log Out   </a>
 </mat-toolbar>
 <!-- <mat-toolbar color="primary">
   <span>Ace AI Academy</span>
@@ -42,7 +42,8 @@
   <a style="color: white;" mat-button routerLink="/register" (click)="closeMenu()" *ngIf="authService.isUserAuthenticated && authService.getUserRole() === 'Admin'">Register</a>
   <a style="color: white;" mat-button routerLink="/login" (click)="LogOut(); closeMenu()" *ngIf="authService.isUserAuthenticated">Log Out</a>
 </div> -->
-
+<!-- <app-alert *ngIf="alertMessage" [message]="alertMessage" [type]="alertType"></app-alert> -->
+<app-alert></app-alert>
 <ngx-spinner type="ball-scale-multiple"><p style="color: white" > Please Wait... </p></ngx-spinner>
 <!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "pacman" [fullScreen] = "true"><p style="color: white" > Please Wait... </p></ngx-spinner> -->
 <div class="container mt-4">
