@@ -25,7 +25,7 @@ export class LiveComponent implements OnInit {
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private authService: AuthService, private router: Router) { }
   ngOnInit() {
 
-    if (this.authService.getUserRole() != "Admin") {
+    if (this.authService.getUserRole() != "Admin" && this.authService.getUserRole() != "Marketing") {
       this.authService.isSubscriptionAvailable().subscribe((res) => {
         if (!res.success) {
           this.router.navigate(['subscribe']);

@@ -13,12 +13,12 @@ import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatCardModule, CommonModule,MatCheckbox],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatCardModule, CommonModule, MatCheckbox],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  user = { email: '', firstName: '', lastName: '', password: '', phoneNumber: '', city: '', state: '', country: '', confirmPassword: '',isAgreed:false };
+  user = { email: '', firstName: '', lastName: '', password: '', phoneNumber: '', city: '', state: '', country: '', confirmPassword: '', isAgreed: false };
   constructor(private authService: AuthService, private spinner: NgxSpinnerService, private router: Router) { }
   onRegister() {
     this.spinner.show();
@@ -34,34 +34,38 @@ export class RegisterComponent {
       Country: this.user.country,
       PostalCode: "",
       State: this.user.state,
-      IsAgreed:this.user.isAgreed
+      IsAgreed: this.user.isAgreed
     };
 
     this.authService.register(registerUserReq).subscribe({
       next: (response) => {
         //debugger;
         this.spinner.hide();
-        const userRequest: UserLoginRequest = {
-          Email: registerUserReq.Email,
-          PasswordHash: registerUserReq.PasswordHash
-        };
-        this.spinner.show();
-        this.authService.login(userRequest).subscribe({
-          next: (res) => {
-            this.spinner.hide();
-            alert(response.message);
-            this.router.navigate(['live']);
-          },// this.router.navigate(['#/live']),
-          error: exp => {
-            this.spinner.hide();
-            alert(exp.error.message);
-          }
-        });
-        
+        if (this.authService.getUserRole() != "Admin") {
+          const userRequest: UserLoginRequest = {
+            Email: registerUserReq.Email,
+            PasswordHash: registerUserReq.PasswordHash
+          };
+          this.spinner.show();
+          this.authService.login(userRequest).subscribe({
+            next: (res) => {
+              this.spinner.hide();
+              alert(response.message);
+              this.router.navigate(['live']);
+            },// this.router.navigate(['#/live']),
+            error: exp => {
+              this.spinner.hide();
+              alert(exp.error.message);
+            }
+          });
+        }else
+        {
+          alert(response.message);
+        }
       },
-      error: (err) => { 
-        this.spinner.hide(); 
-        alert(err.error.message); 
+      error: (err) => {
+        this.spinner.hide();
+        alert(err.error.message);
       },
     });
   }

@@ -8,5 +8,5 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './about.component.scss'
 })
 export class AboutComponent {
-
+email:string="support@aceaiacademy.com";
 }
