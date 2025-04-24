@@ -42,7 +42,7 @@ export class SubscriptionComponent {
   elementsOptions: StripeElementsOptions = {
     locale: 'en'
   };
-  constructor(private stripeService: StripeService, private spinner: NgxSpinnerService,private router: Router, private subscriptionSrvice: SubscriptionService) { }
+  constructor(private stripeService: StripeService, private spinner: NgxSpinnerService, private router: Router, private subscriptionSrvice: SubscriptionService) { }
   // Show payment form only for paid plans
   get showPaymentForm(): boolean {
     return this.selectedPlan === 'monthly' || this.selectedPlan === 'yearly' || this.selectedPlan === 'trial';
@@ -56,11 +56,14 @@ export class SubscriptionComponent {
     this.isCardComplete = event.complete;
   }
   isFormValid(): boolean {
-    const basicFieldsFilled = this.selectedPlan.length>0 && this.nameOnTheCard.trim().length > 0;
 
-    // if (this.selectedPlan === 'trial') {
-    //   return basicFieldsFilled;
-    // }
+
+
+    const basicFieldsFilled = this.selectedPlan.length > 0 && this.nameOnTheCard.trim().length > 0;
+
+    if (this.selectedPlan === 'trial') {
+      return basicFieldsFilled;
+    }
 
     return basicFieldsFilled && this.isCardComplete;
   }
@@ -72,70 +75,67 @@ export class SubscriptionComponent {
       // debugger;
       // Create Stripe Payment Method
       this.spinner.show();
-      this.stripeService.createPaymentMethod({
-        type: 'card',
-        card: stripeCard.element,
-        billing_details: {
-          name: this.nameOnTheCard
-        }
-      }).subscribe((result) => {
-        if (result.paymentMethod) {
-          // debugger;
-          let request: SubscriptionRequest = {
-            Name: this.nameOnTheCard,
-            Plan: this.selectedPlan,
-            StripeToken: result.paymentMethod.id
-          };
-          this.subscriptionSrvice.subscribe(request).subscribe(
-            {
-              
-              next: (res: any) => {
-                this.spinner.hide();
-                // debugger;
-                alert(res.message);
-                this.router.navigate(['live']); 
-              },
-              error: (err) => {
-                this.spinner.hide();
-                // debugger;
-                alert('Subscription failed: ' + err.message)
-              }
-            });
-        } else {
-          this.spinner.hide();
-          alert('Error in capturing payment info: ' + result.error.message);
-        }
-      });
-      // this.stripeService
-      //   .createToken(stripeCard.element, { name: this.nameOnTheCard })
-      //   .subscribe((result) => {
-      //     if (result.token) {
-      //       // debugger;
-      //       let request: SubscriptionRequest = {
-      //         Name: this.nameOnTheCard,
-      //         Plan: this.selectedPlan,
-      //         StripeToken: result.token.id
-      //       };
-      //       this.subscriptionSrvice.subscribe(request).subscribe(
-      //         {
-                
-      //           next: (res: any) => {
-      //             this.spinner.hide();
-      //             // debugger;
-      //             alert(res.message);
-      //             this.router.navigate(['live']); 
-      //           },
-      //           error: (err) => {
-      //             this.spinner.hide();
-      //             // debugger;
-      //             alert('Subscription failed: ' + err.message)
-      //           }
-      //         });
-      //     } else {
-      //       this.spinner.hide();
-      //       alert('Error in capturing payment info: ' + result.error.message);
-      //     }
-      //   });
+
+      //If trial then no need to create payment method in stripe
+      if (this.selectedPlan == 'trial') {
+
+        let request: SubscriptionRequest = {
+          Name: this.nameOnTheCard,
+          Plan: this.selectedPlan,
+          StripeToken: ""
+        };
+        this.subscriptionSrvice.subscribe(request).subscribe(
+          {
+            next: (res: any) => {
+              this.spinner.hide();
+              // debugger;
+              alert(res.message);
+              this.router.navigate(['live']);
+            },
+            error: (err) => {
+              this.spinner.hide();
+              // debugger;
+              alert('Subscription failed: ' + err.message)
+            }
+          });
+      }
+      else {
+        this.stripeService.createPaymentMethod({
+          type: 'card',
+          card: stripeCard.element,
+          billing_details: {
+            name: this.nameOnTheCard
+          }
+        }).subscribe((result) => {
+          if (result.paymentMethod) {
+            // debugger;
+            let request: SubscriptionRequest = {
+              Name: this.nameOnTheCard,
+              Plan: this.selectedPlan,
+              StripeToken: result.paymentMethod.id
+            };
+            this.subscriptionSrvice.subscribe(request).subscribe(
+              {
+
+                next: (res: any) => {
+                  this.spinner.hide();
+                  // debugger;
+                  alert(res.message);
+                  this.router.navigate(['live']);
+                },
+                error: (err) => {
+                  this.spinner.hide();
+                  // debugger;
+                  alert('Subscription failed: ' + err.message)
+                }
+              });
+          } else {
+            this.spinner.hide();
+            alert('Error in capturing payment info: ' + result.error.message);
+          }
+        });
+      }
+
     } else {
       //this.spinner.hide();
       alert('Subscribed to Free Trial!');

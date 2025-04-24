@@ -68,7 +68,7 @@ export class LoginComponent {
         },// this.router.navigate(['#/live']),
         error: err => { 
           this.spinner.hide(); 
-          alert(err.error); }
+          alert(err.error.message); }
       });
     }
 
